@@ -16,7 +16,7 @@ public class Employee {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long employeeId;
+    private Long employeeId;
     private String name;
     private String title;
     @Positive
@@ -42,10 +42,10 @@ public class Employee {
 	public void setEmployeeTimestamp(LocalDate employeeTimestamp) {
 		this.employeeTimestamp = employeeTimestamp;
 	}
-	public long getEmployeeId() {
+	public Long getEmployeeId() {
     	return employeeId;
     }
-    public void setEmployeeId(long employeeId) {
+    public void setEmployeeId(Long employeeId) {
     	this.employeeId = employeeId;
     }
     public String getName() {

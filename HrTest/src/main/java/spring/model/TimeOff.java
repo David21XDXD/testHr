@@ -3,6 +3,8 @@ package spring.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,9 +22,11 @@ public class TimeOff {
 	private long requestId;
 
 	@Column(name = "start_date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
 	private LocalDate startDate;
 
 	@Column(name = "end_date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
 	private LocalDate endDate;
 
 	@Enumerated(EnumType.STRING)

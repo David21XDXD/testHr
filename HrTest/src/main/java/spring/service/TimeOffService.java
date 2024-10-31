@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import spring.model.RequestStatus;
 import spring.model.TimeOff;
+import spring.model.Employee;
+import spring.repository.EmployeeRepository;
 import spring.repository.TimeOffRepository;
 
 @Service
@@ -16,11 +18,15 @@ public class TimeOffService {
 
     @Autowired
     private TimeOffRepository timeOffRepository;
+    
+    @Autowired EmployeeRepository employeeRepositoy;
 
     @Transactional
-    public TimeOff createTimeOffRequest(TimeOff timeOff) {
+    public TimeOff createTimeOffRequest(TimeOff timeOff, Long id) {
+    	Employee employee = employeeRepositoy.findById(id).orElseThrow();
         timeOff.setRequestDate(LocalDate.now());
         timeOff.setRequestStatus(RequestStatus.PENDING);
+        timeOff.setEmployee(employee);
         return timeOffRepository.save(timeOff);
     }
 
