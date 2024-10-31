@@ -19,7 +19,9 @@ public class TimeOffService {
     @Autowired
     private TimeOffRepository timeOffRepository;
     
-    @Autowired EmployeeRepository employeeRepositoy;
+    @Autowired
+    private EmployeeRepository employeeRepositoy;
+
 
     @Transactional
     public TimeOff createTimeOffRequest(TimeOff timeOff, Long id) {

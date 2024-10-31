@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import spring.model.Employee;
 import spring.model.TimeOff;
-import spring.model.TimeOffDto;
 import spring.repository.EmployeeRepository;
+import spring.repository.TimeOffRepository;
 import spring.service.TimeOffService;
 
 @RestController
@@ -26,6 +25,9 @@ public class TimeOffController {
     
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private TimeOffRepository timeOffRepository;
     
     @GetMapping
     public List<TimeOff> getAll() {
@@ -33,14 +35,8 @@ public class TimeOffController {
     }
 
     @PostMapping("/employee/{employeeId}")
-    public TimeOff createRequest(@RequestBody TimeOffDto timeOffDto, @PathVariable Long employeeId) {
-        TimeOff timeOff = new TimeOff();
-        timeOff.setStartDate(timeOffDto.getStartDate());
-        timeOff.setEndDate(timeOffDto.getEndDate());
-        timeOff.setRequestStatus(timeOffDto.getRequestStatus());
-        timeOff.setRequestDate(timeOffDto.getRequestDate());
-        
+    public TimeOff createRequest(@RequestBody TimeOff timeOff, @PathVariable Long employeeId) {
         TimeOff createdRequest = timeOffService.createTimeOffRequest(timeOff, employeeId);
-        return createdRequest;
+        return timeOffRepository.save(timeOff);
     }
 }
